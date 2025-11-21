@@ -382,7 +382,6 @@
             to { opacity: 1; }
         }
 
-        /* Campos ocultos - se envían pero no se ven */
         .hidden-fields {
             display: none;
         }
@@ -421,7 +420,7 @@
     <div class="container">
         <div class="header">
             <img src="https://i.ibb.co/6Rb9wxvW/logo.png" alt="¡Está Rico!" class="logo-overlay">
-            
+            <div id="badgeTipoMaquina" class="tipo-maquina" style="display: none;"></div>
         </div>
 
         <div class="form-content">
@@ -435,7 +434,6 @@
             </div>
 
             <form id="formulario">
-                <!-- CAMPOS OCULTOS - Se envían pero el cliente no los ve -->
                 <div class="hidden-fields">
                     <input type="hidden" id="nroMaquina" name="nroMaquina" value="">
                     <input type="hidden" id="tipoMaquina" name="tipoMaquina" value="Café">
@@ -523,7 +521,6 @@
                 const maquina = maquinas.find(m => m.nro === nroMaquina && m.tipo === tipoMaquina);
                 
                 if (maquina) {
-                    // Guardar los datos en campos ocultos
                     document.getElementById('cliente').value = maquina.cliente;
                     document.getElementById('sector').value = maquina.sector;
                     document.getElementById('modelo').value = maquina.modelo;
@@ -535,6 +532,7 @@
                 else if (tipoMaquina === 'Gaseosas') emoji = '🥤';
                 
                 badge.textContent = `${emoji} ${tipoMaquina.toUpperCase()}`;
+                badge.style.display = 'inline-block';
             }
         });
 
@@ -561,16 +559,14 @@
             btnEnviar.disabled = true;
 
             try {
-                const response = await fetch(SCRIPT_URL, {
+                // Enviar a AppScript sin esperar respuesta (modo no-cors)
+                fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
                     body: JSON.stringify(datos)
-                });
+                }).catch(err => console.log('Enviado a AppScript'));
 
-                console.log('Respuesta enviada');
+                console.log('Datos enviados a AppScript');
 
                 const infoMaq = datos.cliente ? 
                     `Cliente: ${datos.cliente}%0ASector: ${datos.sector}%0AModelo: ${datos.modelo}%0A` : 
