@@ -420,7 +420,6 @@
     <div class="container">
         <div class="header">
             <img src="https://i.ibb.co/6Rb9wxvW/logo.png" alt="¡Está Rico!" class="logo-overlay">
-            <div id="badgeTipoMaquina" class="tipo-maquina" style="display: none;"></div>
         </div>
 
         <div class="form-content">
@@ -509,30 +508,29 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             const nroMaquina = obtenerParametroURL('nro');
-            const tipoMaquina = obtenerParametroURL('tipo') || 'Café';
+            const tipoMaquinaParam = obtenerParametroURL('tipo') || 'Café';
             
             console.log('Número máquina:', nroMaquina);
-            console.log('Tipo máquina:', tipoMaquina);
+            console.log('Tipo máquina recibido:', tipoMaquinaParam);
             
             if (nroMaquina) {
                 document.getElementById('nroMaquina').value = nroMaquina;
-                document.getElementById('tipoMaquina').value = tipoMaquina;
+                document.getElementById('tipoMaquina').value = tipoMaquinaParam;
                 
-                const maquina = maquinas.find(m => m.nro === nroMaquina && m.tipo === tipoMaquina);
+                const maquina = maquinas.find(m => m.nro === nroMaquina && m.tipo === tipoMaquinaParam);
                 
                 if (maquina) {
                     document.getElementById('cliente').value = maquina.cliente;
                     document.getElementById('sector').value = maquina.sector;
                     document.getElementById('modelo').value = maquina.modelo;
+                    console.log('Máquina encontrada:', maquina);
+                } else {
+                    console.log('Máquina no encontrada. Buscando entre:', maquinas);
                 }
                 
-                const badge = document.getElementById('badgeTipoMaquina');
                 let emoji = '☕';
-                if (tipoMaquina === 'Snacks') emoji = '🍿';
-                else if (tipoMaquina === 'Gaseosas') emoji = '🥤';
-                
-                badge.textContent = `${emoji} ${tipoMaquina.toUpperCase()}`;
-                badge.style.display = 'inline-block';
+                if (tipoMaquinaParam === 'Snacks') emoji = '🍿';
+                else if (tipoMaquinaParam === 'Gaseosas') emoji = '🥤';
             }
         });
 
@@ -559,14 +557,16 @@
             btnEnviar.disabled = true;
 
             try {
-                // Enviar a AppScript sin esperar respuesta (modo no-cors)
-                fetch(SCRIPT_URL, {
+                const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                     body: JSON.stringify(datos)
-                }).catch(err => console.log('Enviado a AppScript'));
+                });
 
-                console.log('Datos enviados a AppScript');
+                console.log('Respuesta enviada');
 
                 const infoMaq = datos.cliente ? 
                     `Cliente: ${datos.cliente}%0ASector: ${datos.sector}%0AModelo: ${datos.modelo}%0A` : 
