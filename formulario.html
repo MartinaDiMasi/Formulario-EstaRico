@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #3e1515 0%, #4C1A1A 50%, #5d2424 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #c5c5c5 50%, #bbbbbb 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             min-height: 100vh;
@@ -77,7 +77,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #382121 0%, #382929 50%, #4a2020 100%);
+            background: #3f1615;
             padding: 30px 20px;
             text-align: center;
             position: relative;
@@ -120,28 +120,6 @@
             50% { transform: translateY(-10px); }
         }
 
-        .tipo-maquina {
-            display: inline-block;
-            background: linear-gradient(135deg, #FF9933 0%, #ffb366 100%);
-            color: white;
-            padding: 14px 35px;
-            border-radius: 30px;
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-top: 10px;
-            box-shadow: 
-                0 6px 20px rgba(255, 153, 51, 0.5),
-                inset 0 -2px 10px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 1;
-            animation: badgePulse 3s ease-in-out infinite;
-        }
-
-        @keyframes badgePulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 6px 20px rgba(255, 153, 51, 0.5); }
-            50% { transform: scale(1.05); box-shadow: 0 8px 25px rgba(255, 153, 51, 0.7); }
-        }
-
         .form-content {
             padding: 40px;
             position: relative;
@@ -178,8 +156,9 @@
         .form-group {
             margin-bottom: 25px;
             animation: fadeInUp 0.6s ease both;
+            position: relative;
+            z-index: 1;
         }
-
         .form-group:nth-child(1) { animation-delay: 0.5s; }
         .form-group:nth-child(2) { animation-delay: 0.6s; }
         .form-group:nth-child(3) { animation-delay: 0.7s; }
@@ -208,7 +187,7 @@
         }
 
         .required {
-            color: #FF9933;
+            color: #4B1B18;
             margin-left: 4px;
             animation: requiredPulse 2s ease-in-out infinite;
         }
@@ -262,6 +241,218 @@
             background-color: white;
         }
 
+        
+
+        /* Estilos para el selector de país personalizado */
+        .phone-input-container {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+            position: relative;
+        }
+
+        .country-select-wrapper {
+            position: relative;
+            width: 90px;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        /* Selector personalizado visible */
+        .custom-select {
+            position: relative;
+            width: 100%;
+        }
+
+        .select-selected {
+            padding: 10px;
+            border: 2px solid #E0E0E0;
+            border-radius: 12px;
+            font-size: 0.95em;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: inherit;
+            background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+            cursor: pointer;
+            font-weight: 500;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            user-select: none;
+            min-height: 50px;
+            padding-right: 2rem;
+        }
+
+        .select-selected .flag-icon {
+            position: static;
+            margin: 0;
+        }
+
+        .select-selected span {
+            display: none;
+        }
+
+        .select-selected::after {
+            content: '▼';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4B1B18;
+            font-size: 0.7em;
+            transition: all 0.3s ease;
+        }
+
+        .select-selected.select-arrow-active::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .select-selected:hover {
+            border-color: #4B1B18;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 153, 51, 0.2);
+            background: linear-gradient(135deg, #c7c7c7b4 0%, #fff5e6 100%);
+        }
+
+        .select-selected:hover::after {
+            color: #4C1A1A;
+        }
+
+        .select-items {
+                    position: absolute;
+                    background-color: white;
+                    bottom: calc(100% + 8px);
+                    left: 0;
+                    right: auto;
+                    min-width: 200px;
+                    z-index: 999;
+                    border-radius: 12px;
+                    box-shadow: 0 8px 32px rgba(116, 113, 113, 0.25);
+                    max-height: 280px;
+                    overflow-y: auto;
+                    border: 2px solid #4B1B18;
+                    animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                }
+
+                @keyframes slideUp {
+                    from {
+                        opacity: 0;
+                        transform: translateY(10px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+        .select-hide {
+            display: none;
+        }
+
+        .select-items div {
+            padding: 14px 16px 14px 52px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            font-weight: 500;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            white-space: nowrap;
+        }
+
+        .select-items div .flag-icon {
+            position: absolute;
+            left: 16px;
+        }
+
+        .select-items div span {
+            display: inline;
+        }
+
+        .select-items div:hover {
+            background: #b4b3b3b6;
+            padding-left: 56px;
+        }
+
+        .select-items div.same-as-selected {
+            background: linear-gradient(135deg, #4b1b18d1 0%, #583d3b 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Estilos de las banderas en el selector */
+        .flag-icon {
+            width: 28px;
+            height: 20px;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+        }
+
+        /* Ocultar el select nativo */
+        .country-select-wrapper select {
+            display: none;
+        }
+
+        /* Scroll personalizado para la lista */
+        .select-items::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .select-items::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .select-items::-webkit-scrollbar-thumb {
+            background: #4B1B18;
+            border-radius: 10px;
+        }
+
+        .select-items::-webkit-scrollbar-thumb:hover {
+            background: #4C1A1A;
+        }
+
+        .phone-input {
+            flex: 1;
+            position: relative;
+        }
+
+        .phone-input::before {
+            content: '📱';
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .phone-input:focus::before {
+            opacity: 0.8;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        #celular {
+            padding-left: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        #celular:hover {
+            background: linear-gradient(135deg, #ffffff 0%, #fff5e6 100%);
+        }
+
+        #celular:focus {
+            background: white;
+        }
+
         .submit-btn {
             width: 100%;
             padding: 18px;
@@ -295,7 +486,7 @@
 
         .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 153, 51, 0.5);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.5);
             background-position: 100% 0;
         }
 
@@ -356,7 +547,7 @@
 
         .spinner {
             border: 5px solid #f3f3f3;
-            border-top: 5px solid #FF9933;
+            border-top: 5px solid #4B1B18;
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -386,6 +577,15 @@
             display: none;
         }
 
+        .form-group.hidden {
+            display: none;
+        }
+
+        .form-group.hidden.visible {
+            display: block;
+            animation: fadeInUp 0.4s ease;
+        }
+
         @media (max-width: 600px) {
             .form-content {
                 padding: 30px 25px;
@@ -395,22 +595,16 @@
                 font-size: 1.6em;
             }
 
-            .tipo-maquina {
-                font-size: 1.1em;
-                padding: 12px 28px;
-            }
-
             .logo-overlay {
                 width: 250px;
             }
-        }
 
-        @media (max-width: 380px) {
-            .form-title {
-                font-size: 1.2em;
+            .phone-input-container {
+                flex-direction: column;
             }
-            .form-subtitle {
-                font-size: 0.8rem;
+
+            .country-select-wrapper {
+                width: 100%;
             }
         }
         
@@ -447,8 +641,17 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="pagado">¿Ha realizado el pago? <span class="required">*</span></label>
+                    <select id="pagado" name="pagado" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="Sí">✅ Sí</option>
+                        <option value="No">❌ No</option>
+                    </select>
+                </div>
+
+                <div class="form-group hidden" id="tipoPagoGroup">
                     <label for="tipoPago">Tipo de Pago Realizado <span class="required">*</span></label>
-                    <select id="tipoPago" name="tipoPago" required>
+                    <select id="tipoPago" name="tipoPago">
                         <option value="">Seleccione una opción</option>
                         <option value="Efectivo">💵 Efectivo</option>
                         <option value="Tarjeta">💳 Tarjeta</option>
@@ -459,23 +662,97 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="celular">Número de Celular <span class="required">*</span></label>
-                    <input type="tel" id="celular" name="celular" placeholder="Ej: 3512345678" required pattern="[0-9]{10,15}">
-                    <small>Sin espacios ni guiones (10-15 dígitos)</small>
+                    <label for="celular">
+                        Número de Celular
+                        <span style="color: #4B1B18; font-size: 0.85em; font-weight: normal; margin-left: 8px;">
+                            (Opcional)
+                        </span>
+                    </label>
+                    <div class="phone-input-container">
+                        <div class="country-select-wrapper">
+                            <div class="custom-select">
+                                <div class="select-selected">
+                                    <img src="https://flagcdn.com/w40/ar.png" class="flag-icon" alt="AR">
+                                    <span>ARG +54</span>
+                                </div>
+                                <div class="select-items select-hide">
+                                    <div data-value="+54" data-country="ar">
+                                        <img src="https://flagcdn.com/w40/ar.png" class="flag-icon" alt="AR">
+                                        <span>ARG +54</span>
+                                    </div>
+                                    <div data-value="+56" data-country="cl">
+                                        <img src="https://flagcdn.com/w40/cl.png" class="flag-icon" alt="CL">
+                                        <span>CHL +56</span>
+                                    </div>
+                                    <div data-value="+55" data-country="br">
+                                        <img src="https://flagcdn.com/w40/br.png" class="flag-icon" alt="BR">
+                                        <span>BRA +55</span>
+                                    </div>
+                                    <div data-value="+598" data-country="uy">
+                                        <img src="https://flagcdn.com/w40/uy.png" class="flag-icon" alt="UY">
+                                        <span>URY +598</span>
+                                    </div>
+                                    <div data-value="+595" data-country="py">
+                                        <img src="https://flagcdn.com/w40/py.png" class="flag-icon" alt="PY">
+                                        <span>PRY +595</span>
+                                    </div>
+                                    <div data-value="+591" data-country="bo">
+                                        <img src="https://flagcdn.com/w40/bo.png" class="flag-icon" alt="BO">
+                                        <span>BOL +591</span>
+                                    </div>
+                                    <div data-value="+51" data-country="pe">
+                                        <img src="https://flagcdn.com/w40/pe.png" class="flag-icon" alt="PE">
+                                        <span>PER +51</span>
+                                    </div>
+                                    <div data-value="+593" data-country="ec">
+                                        <img src="https://flagcdn.com/w40/ec.png" class="flag-icon" alt="EC">
+                                        <span>ECU +593</span>
+                                    </div>
+                                    <div data-value="+57" data-country="co">
+                                        <img src="https://flagcdn.com/w40/co.png" class="flag-icon" alt="CO">
+                                        <span>COL +57</span>
+                                    </div>
+                                    <div data-value="+58" data-country="ve">
+                                        <img src="https://flagcdn.com/w40/ve.png" class="flag-icon" alt="VE">
+                                        <span>VEN +58</span>
+                                    </div>
+                                    <div data-value="+52" data-country="mx">
+                                        <img src="https://flagcdn.com/w40/mx.png" class="flag-icon" alt="MX">
+                                        <span>MEX +52</span>
+                                    </div>
+                                    <div data-value="+1" data-country="us">
+                                        <img src="https://flagcdn.com/w40/us.png" class="flag-icon" alt="US">
+                                        <span>USA +1</span>
+                                    </div>
+                                    <div data-value="+34" data-country="es">
+                                        <img src="https://flagcdn.com/w40/es.png" class="flag-icon" alt="ES">
+                                        <span>ESP +34</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <select id="codigoPais" style="display: none;">
+                                <option value="+54" data-country="ar" selected>ARG +54</option>
+                                <option value="+56" data-country="cl">CHL +56</option>
+                                <option value="+55" data-country="br">BRA +55</option>
+                                <option value="+598" data-country="uy">URY +598</option>
+                                <option value="+595" data-country="py">PRY +595</option>
+                                <option value="+591" data-country="bo">BOL +591</option>
+                                <option value="+51" data-country="pe">PER +51</option>
+                                <option value="+593" data-country="ec">ECU +593</option>
+                                <option value="+57" data-country="co">COL +57</option>
+                                <option value="+58" data-country="ve">VEN +58</option>
+                                <option value="+52" data-country="mx">MEX +52</option>
+                                <option value="+1" data-country="us">USA +1</option>
+                                <option value="+34" data-country="es">ESP +34</option>
+                            </select>
+                        </div>
+                        <input type="tel" id="celular" name="celular" class="phone-input" placeholder="Ej: 3512345678" pattern="[0-9]{6,15}">
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="comentarios">Comentarios</label>
+                    <label for="comentarios">¿En qué podemos ayudarte?</label>
                     <textarea id="comentarios" name="comentarios" placeholder="Agrega detalles adicionales sobre el problema..."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="pagado">¿Ha realizado el pago? <span class="required">*</span></label>
-                    <select id="pagado" name="pagado" required>
-                        <option value="">Seleccione una opción</option>
-                        <option value="Sí">✅ Sí</option>
-                        <option value="No">❌ No</option>
-                    </select>
                 </div>
 
                 <button type="submit" class="submit-btn" id="btnEnviar">ENVIAR FORMULARIO</button>
@@ -484,20 +761,21 @@
     </div>
 
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyH6JbdO7yc_Vb8I7GOHgtp2s4Lo-pBDetRiKFRlu6usP5RGx0wSslKZl3AyHID_F8y1g/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzutA4i97HtS8uP__ADI-aZlQWDfUBkv9omSVzyxZWXaL84RHXrkztVvTjR6bg0D3DZng/exec';
         const WHATSAPP_NUMBER = '3512348349';
 
         const formulario = document.getElementById('formulario');
         const mensaje = document.getElementById('mensaje');
         const loading = document.getElementById('loading');
         const btnEnviar = document.getElementById('btnEnviar');
+        const pagadoSelect = document.getElementById('pagado');
+        const tipoPagoGroup = document.getElementById('tipoPagoGroup');
+        const tipoPagoSelect = document.getElementById('tipoPago');
 
         const maquinas = [
             { nro: '1234', cliente: 'Aeropuerto', sector: 'Arribos', modelo: 'H400', tipo: 'Café' },
             { nro: '1234', cliente: 'Aeropuerto', sector: 'Arribos', modelo: 'H400', tipo: 'Snacks' },
             { nro: '1234', cliente: 'Aeropuerto', sector: 'Arribos', modelo: 'H400', tipo: 'Gaseosas' },
-            { nro: '9874', cliente: 'Gestam', sector: 'Personal', modelo: 'H4500', tipo: 'Café' },
-            { nro: '9874', cliente: 'Gestam', sector: 'Personal', modelo: 'H4500', tipo: 'Snacks' },
             { nro: '9874', cliente: 'Gestam', sector: 'Personal', modelo: 'H4500', tipo: 'Gaseosas' }
         ];
 
@@ -508,34 +786,96 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             const nroMaquina = obtenerParametroURL('nro');
-            const tipoMaquinaParam = obtenerParametroURL('tipo') || 'Café';
-            
-            console.log('Número máquina:', nroMaquina);
-            console.log('Tipo máquina recibido:', tipoMaquinaParam);
+            const tipoMaquina = obtenerParametroURL('tipo') || 'Café';
             
             if (nroMaquina) {
                 document.getElementById('nroMaquina').value = nroMaquina;
-                document.getElementById('tipoMaquina').value = tipoMaquinaParam;
+                document.getElementById('tipoMaquina').value = tipoMaquina;
                 
-                const maquina = maquinas.find(m => m.nro === nroMaquina && m.tipo === tipoMaquinaParam);
+                const maquina = maquinas.find(m => m.nro === nroMaquina && m.tipo === tipoMaquina);
                 
                 if (maquina) {
                     document.getElementById('cliente').value = maquina.cliente;
                     document.getElementById('sector').value = maquina.sector;
                     document.getElementById('modelo').value = maquina.modelo;
-                    console.log('Máquina encontrada:', maquina);
-                } else {
-                    console.log('Máquina no encontrada. Buscando entre:', maquinas);
                 }
-                
-                let emoji = '☕';
-                if (tipoMaquinaParam === 'Snacks') emoji = '🍿';
-                else if (tipoMaquinaParam === 'Gaseosas') emoji = '🥤';
+            }
+
+            // Inicializar selector personalizado de países
+            initCustomSelect();
+        });
+
+        function initCustomSelect() {
+            const selectSelected = document.querySelector('.select-selected');
+            const selectItems = document.querySelector('.select-items');
+            const selectOptions = selectItems.querySelectorAll('div');
+            const hiddenSelect = document.getElementById('codigoPais');
+
+            // Toggle del menú
+            selectSelected.addEventListener('click', function(e) {
+                e.stopPropagation();
+                selectItems.classList.toggle('select-hide');
+                this.classList.toggle('select-arrow-active');
+            });
+
+            // Seleccionar opción
+            selectOptions.forEach(function(option) {
+                option.addEventListener('click', function() {
+                    const value = this.getAttribute('data-value');
+                    const country = this.getAttribute('data-country');
+                    const flagSrc = this.querySelector('img').src;
+                    const text = this.querySelector('span').textContent;
+
+                    // Actualizar el selector visible
+                    selectSelected.innerHTML = `
+                        <img src="${flagSrc}" class="flag-icon" alt="${country}">
+                        <span>${text}</span>
+                    `;
+
+                    // Actualizar el select oculto
+                    hiddenSelect.value = value;
+
+                    // Remover clase activa de todas las opciones
+                    selectOptions.forEach(opt => opt.classList.remove('same-as-selected'));
+                    
+                    // Agregar clase activa a la opción seleccionada
+                    this.classList.add('same-as-selected');
+
+                    // Cerrar el menú
+                    selectItems.classList.add('select-hide');
+                    selectSelected.classList.remove('select-arrow-active');
+                });
+            });
+
+            // Cerrar al hacer click fuera
+            document.addEventListener('click', function() {
+                selectItems.classList.add('select-hide');
+                selectSelected.classList.remove('select-arrow-active');
+            });
+
+            // Marcar la primera opción como seleccionada por defecto
+            selectOptions[0].classList.add('same-as-selected');
+        }
+
+        // Evento para mostrar/ocultar el campo de tipo de pago
+        pagadoSelect.addEventListener('change', function() {
+            if (this.value === 'Sí') {
+                tipoPagoGroup.classList.add('visible');
+                tipoPagoSelect.setAttribute('required', 'required');
+            } else {
+                tipoPagoGroup.classList.remove('visible');
+                tipoPagoSelect.removeAttribute('required');
+                tipoPagoSelect.value = '';
             }
         });
 
         formulario.addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            // Obtener el código de país y el número
+            const codigoPais = document.getElementById('codigoPais').value;
+            const numeroCelular = document.getElementById('celular').value.trim();
+            const celularCompleto = numeroCelular ? `${codigoPais}${numeroCelular}` : '';
 
             const datos = {
                 nroMaquina: document.getElementById('nroMaquina').value,
@@ -545,7 +885,7 @@
                 modelo: document.getElementById('modelo').value,
                 nombre: document.getElementById('nombre').value.trim(),
                 tipoPago: document.getElementById('tipoPago').value,
-                celular: document.getElementById('celular').value.trim(),
+                celular: celularCompleto,
                 comentarios: document.getElementById('comentarios').value.trim(),
                 pagado: document.getElementById('pagado').value
             };
@@ -574,13 +914,8 @@
 
                 const mensajeWhatsApp = 
                     '🚨 NUEVA ATENCIÓN REGISTRADA' + '%0A%0A' +
-                    '--- DATOS DE LA MÁQUINA ---' + '%0A' +
-                    'Nro: ' + datos.nroMaquina + '%0A' +
-                    infoMaq +
-                    'Tipo: ' + datos.tipoMaquina + '%0A%0A' +
                     '--- DATOS DEL CLIENTE ---' + '%0A' +
-                    'Nombre: ' + datos.nombre + '%0A' +
-                    'Celular: ' + datos.celular + '%0A%0A' +
+                    '👤 *Nombre:* ' + datos.nombre + '%0A%0A' +
                     '--- INFORMACIÓN DE PAGO ---' + '%0A' +
                     'Método: ' + datos.tipoPago + '%0A' +
                     'Pago realizado: ' + datos.pagado + '%0A%0A' +
