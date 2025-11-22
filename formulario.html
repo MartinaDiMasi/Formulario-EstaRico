@@ -81,7 +81,7 @@
             padding: 30px 20px;
             text-align: center;
             position: relative;
-            overflow: hidden;
+            /* overflow: hidden; */
         }
 
         .header::before {
@@ -240,8 +240,6 @@
             cursor: pointer;
             background-color: white;
         }
-
-        
 
         /* Estilos para el selector de país personalizado */
         .phone-input-container {
@@ -587,24 +585,97 @@
         }
 
         @media (max-width: 600px) {
+            body {
+                padding: 0;
+                background: white;
+            }
+
+            body::before {
+                display: none;
+            }
+
+            .container {
+                max-width: 100%;
+                border-radius: 0;
+                box-shadow: none;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                overflow-y: auto;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+
             .form-content {
-                padding: 30px 25px;
+                padding: 25px 20px;
+                flex: 1;
             }
 
             .form-title {
-                font-size: 1.6em;
+                font-size: 1.5em;
+            }
+
+            .form-subtitle {
+                font-size: 0.9em;
+                margin-bottom: 25px;
             }
 
             .logo-overlay {
-                width: 250px;
+                width: 200px;
             }
 
             .phone-input-container {
-                flex-direction: column;
+                flex-direction: row;
+                gap: 8px;
             }
 
             .country-select-wrapper {
-                width: 100%;
+                width: 70px;
+                flex-shrink: 0;
+            }
+
+            .select-selected {
+                min-height: 48px;
+                padding: 8px;
+                font-size: 0.9em;
+            }
+
+            .select-selected span {
+                display: none;
+            }
+
+            .flag-icon {
+                width: 24px;
+                height: 18px;
+            }
+
+            .phone-input::before {
+                font-size: 1em;
+                left: 12px;
+            }
+
+            #celular {
+                padding-left: 18px;
+                font-size: 1em;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            input[type="text"],
+            input[type="tel"],
+            select,
+            textarea {
+                padding: 14px;
+                font-size: 16px;
+            }
+
+            .submit-btn {
+                padding: 16px;
+                font-size: 1em;
             }
         }
         
