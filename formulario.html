@@ -918,16 +918,16 @@
             selectOptions[0].classList.add('same-as-selected');
         }
 
-        pagadoSelect.addEventListener('change', function() {
-            if (this.value === 'Sí') {
-                tipoPagoGroup.classList.add('visible');
-                tipoPagoSelect.setAttribute('required', 'required');
-            } else {
-                tipoPagoGroup.classList.remove('visible');
-                tipoPagoSelect.removeAttribute('required');
-                tipoPagoSelect.value = '';
-            }
-        });
+            pagadoSelect.addEventListener('change', function() {
+                        if (this.value === 'Sí') {
+                            tipoPagoGroup.classList.add('visible');
+                            tipoPagoSelect.setAttribute('required', 'required');
+                        } else {
+                            tipoPagoGroup.classList.remove('visible');
+                            tipoPagoSelect.removeAttribute('required');
+                            tipoPagoSelect.value = '-';
+                        }
+                    });
 
         formulario.addEventListener('submit', async (e) => {
             e.preventDefault();
