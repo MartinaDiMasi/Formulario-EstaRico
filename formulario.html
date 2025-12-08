@@ -967,23 +967,23 @@
 
                 console.log('Respuesta enviada');
 
-            const mensajeWhatsApp = 
-                '🚨 NUEVA ATENCIÓN REGISTRADA' + '%0A%0A' +
-                '--- DATOS DE LA MÁQUINA ---' + '%0A' +
-                '🔢 *NRO:* ' + datos.nroMaquina + '%0A' +
-                '🏢 *CLIENTE:* ' + datos.cliente + '%0A' +
-                '📍 *SECTOR:* ' + datos.sector + '%0A' +
-                '☕ *TIPO:* ' + datos.tipoMaquina + '%0A' +
-                '⚙️ *MODELO:* ' + datos.modelo + '%0A' +
-                (datos.sistPago ? '💳 *SIST.PAGO:* ' + datos.sistPago + '%0A' : '') +
-                (datos.obs ? '📝 *OBS:* ' + datos.obs + '%0A' : '') +
-                '%0A--- DATOS DEL CLIENTE ---' + '%0A' +
-                '👤 *Nombre:* ' + datos.nombre + '%0A' +
-                '💳 *Sistema de Pago:* ' + datos.tipoPago + '%0A' +
-                '✅ *Pago realizado:* ' + datos.pagado + '%0A' +
-                (datos.celular ? '📱 *Celular:* ' + datos.celular + '%0A' : '') +
-                '%0A--- COMENTARIOS ---' + '%0A' +
-                (datos.comentarios || 'Sin comentarios adicionales');
+                const mensajeWhatsApp = 
+                    '🚨 NUEVA ATENCIÓN REGISTRADA' + '%0A%0A' +
+                    '--- DATOS DE LA MÁQUINA ---' + '%0A' +
+                    '🔢 *NRO:* ' + datos.nroMaquina + '%0A' +
+                    '🏢 *CLIENTE:* ' + datos.cliente + '%0A' +
+                    '📍 *SECTOR:* ' + datos.sector + '%0A' +
+                    '☕ *TIPO:* ' + datos.tipoMaquina + '%0A' +
+                    '⚙️ *MODELO:* ' + datos.modelo + '%0A' +
+                    '💳 *SIST.PAGO:* ' + (datos.sistPago || '') + '%0A' +
+                    '📝 *OBS:* ' + (datos.obs || '') + '%0A' +
+                    '%0A--- DATOS DEL CLIENTE ---' + '%0A' +
+                    '👤 *Nombre:* ' + datos.nombre + '%0A' +
+                    '💳 *Sistema de Pago:* ' + datos.tipoPago + '%0A' +
+                    '✅ *Pago realizado:* ' + datos.pagado + '%0A' +
+                    (datos.celular ? '📱 *Celular:* ' + datos.celular + '%0A' : '') +
+                    '%0A--- COMENTARIOS ---' + '%0A' +
+                    (datos.comentarios || 'Sin comentarios adicionales');
 
                 const urlWhatsApp = `https://wa.me/${WHATSAPP_NUMBER}?text=${mensajeWhatsApp}`;
 
