@@ -975,13 +975,13 @@
                     '📍 *SECTOR:* ' + datos.sector + '%0A' +
                     '☕ *TIPO:* ' + datos.tipoMaquina + '%0A' +
                     '⚙️ *MODELO:* ' + datos.modelo + '%0A%0A' +
-                    '--- DATOS DEL FORMULARIO ---' + '%0A' +
+                    '--- DATOS DEL CLIENTE ---' + '%0A' +
                     '👤 *Nombre:* ' + datos.nombre + '%0A' +
                     '💳 *Sistema de Pago:* ' + datos.tipoPago + '%0A' +
                     '✅ *Pago realizado:* ' + datos.pagado + '%0A' +
                     (datos.celular ? '📱 *Celular:* ' + datos.celular + '%0A' : '') +
-                    '%0A--- OBSERVACIONES ---' + '%0A' +
-                    (datos.comentarios || 'Sin observaciones adicionales');
+                    '%0A--- COMENTARIOS ---' + '%0A' +
+                    (datos.comentarios || 'Sin comentarios adicionales');
 
                 const urlWhatsApp = `https://wa.me/${WHATSAPP_NUMBER}?text=${mensajeWhatsApp}`;
 
