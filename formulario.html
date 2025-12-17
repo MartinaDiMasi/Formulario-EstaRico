@@ -822,31 +822,63 @@
     </div>
 
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzutA4i97HtS8uP__ADI-aZlQWDfUBkv9omSVzyxZWXaL84RHXrkztVvTjR6bg0D3DZng/exec';
-        const WHATSAPP_NUMBER = '3515631347';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzutA4i97HtS8uP__ADI-aZlQWDfUBkv9omSVzyxZWXaL84RHXrkztVvTjR6bg0D3DZng/exec';
+const WHATSAPP_NUMBER = '3515631347';
 
-        const formulario = document.getElementById('formulario');
-        const mensaje = document.getElementById('mensaje');
-        const loading = document.getElementById('loading');
-        const btnEnviar = document.getElementById('btnEnviar');
-        const pagadoSelect = document.getElementById('pagado');
-        const tipoPagoGroup = document.getElementById('tipoPagoGroup');
-        const tipoPagoSelect = document.getElementById('tipoPago');
+let maquinas = []; // Array vacío que se llenará con los datos reales
 
-        const maquinas = [
-            { nro: '1234', cliente: 'Aeropuerto', sector: 'Arribos', modelo: 'H400', tipo: 'Café', sistPago: '', obs: '' },
-            { nro: '1234', cliente: 'Aeropuerto', sector: 'Arribos', modelo: 'H400', tipo: 'Snacks', sistPago: '', obs: '' },
-            { nro: '1234', cliente: 'Aeropuerto', sector: 'Arribos', modelo: 'H400', tipo: 'Gaseosas', sistPago: '', obs: '' },
-            { nro: '9874', cliente: 'Gestam', sector: 'Personal', modelo: 'H4500', tipo: 'Café', sistPago: '', obs: '' },
-            { nro: '9874', cliente: 'Gestam', sector: 'Personal', modelo: 'H4500', tipo: 'Snacks', sistPago: '', obs: '' },
-            { nro: '9874', cliente: 'Gestam', sector: 'Personal', modelo: 'H4500', tipo: 'Gaseosas', sistPago: '', obs: '' }
-            
-        ];
-
-        function obtenerParametroURL(nombre) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(nombre);
+// Cargar máquinas al iniciar la página
+async function cargarMaquinas() {
+    try {
+        const response = await fetch(`${SCRIPT_URL}?accion=obtenerMaquinas`);
+        const data = await response.json();
+        
+        if (data.success) {
+            maquinas = data.maquinas;
+            console.log('Máquinas cargadas:', maquinas.length);
+        } else {
+            console.error('Error al cargar máquinas:', data.message);
         }
+    } catch (error) {
+        console.error('Error al obtener máquinas:', error);
+    }
+}
+
+window.addEventListener('DOMContentLoaded', async () => {
+    // Primero cargar las máquinas
+    await cargarMaquinas();
+    
+    // Luego obtener los parámetros de la URL
+    const nroMaquina = obtenerParametroURL('nro');
+    const tipoMaquina = obtenerParametroURL('tipo') || 'Café';
+    
+    console.log('Buscando máquina:', nroMaquina, tipoMaquina);
+    
+    if (nroMaquina) {
+        document.getElementById('nroMaquina').value = nroMaquina;
+        document.getElementById('tipoMaquina').value = tipoMaquina;
+        
+        // Buscar la máquina en el array cargado
+        const maquina = maquinas.find(m => m.nro === nroMaquina && m.tipo === tipoMaquina);
+        
+        console.log('Máquina encontrada:', maquina);
+        
+        if (maquina) {
+            document.getElementById('cliente').value = maquina.cliente;
+            document.getElementById('sector').value = maquina.sector;
+            document.getElementById('modelo').value = maquina.modelo;
+        } else {
+            console.warn('No se encontró la máquina con nro:', nroMaquina, 'tipo:', tipoMaquina);
+        }
+    }
+
+    initCustomSelect();
+});
+
+function obtenerParametroURL(nombre) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(nombre);
+}
 
         window.addEventListener('DOMContentLoaded', () => {
             const nroMaquina = obtenerParametroURL('nro');
